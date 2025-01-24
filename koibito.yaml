@@ -1,0 +1,71 @@
+---
+packages:
+  copr:
+    - che/nerd-fonts
+    - vulongm/gamescope-git
+    - varlad/zellij
+  install:
+    # Common
+    - fastfetch
+    - lzip
+    - nerd-fonts # Copr che/nerd-fonts
+    - p7zip
+    - syncthing
+    - unrar
+    - wf-recorder
+    - wl-clipboard
+    - xdotool
+    - ydotool
+
+    - fuse
+    - fuse-devel
+    # Shadps4
+    - qt6-qtmultimedia
+
+    # Cli
+    - alacritty
+    - eza
+    - fd-find
+    - fish
+    - git-delta
+    - ripgrep
+    - zoxide
+    - zsh
+    - zellij
+
+    # Media
+    - easyeffects
+    - imv
+    - mpv
+    - pamixer
+    - pipewire
+    - pulseaudio-utils # Until wpctl is better for routes(ports)
+    - python3-ffmpeg-python # Manga check color
+    - wireplumber
+    - zathura
+    - zathura-pdf-mupdf
+
+    # Gaming
+    - gamescope
+    - mangohud
+    - protontricks
+    - steam
+    - steam-devices
+
+    # Hardware Accel
+    - rocm-hip
+    # Broken because of fake dependency atm (16.12.24)
+    # - rocm-opencl
+    - rocm-clinfo
+
+    # JP
+    - langpacks-ja
+    - fcitx5
+    - fcitx5-mozc
+    - mecab
+    - mecab-ipadic
+    # Owocr
+    - python3-devel
+
+    # Other
+    - android-tools

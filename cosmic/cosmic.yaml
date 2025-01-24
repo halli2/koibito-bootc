@@ -1,0 +1,9 @@
+---
+packages:
+  copr:
+    - ryanabx/cosmic-epoch
+  install:
+    - cosmic-desktop
+systemd:
+  enable:
+    - cosmic-greeter.service

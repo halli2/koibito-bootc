@@ -1,0 +1,10 @@
+install:
+  - atuin
+  - dust
+  - podlet
+  - tealdeer
+  - uv
+  - yazi
+
+uv-tool:
+  - jellyfin-mpv-shim 

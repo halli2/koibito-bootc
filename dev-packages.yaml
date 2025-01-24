@@ -1,0 +1,40 @@
+---
+# Packages to install
+packages:
+  copr:
+    # - ublue-os/staging
+    - atim/lazygit
+
+  install:
+    # Rust
+    # - rust
+    # - cargo
+    # - rust-analyzer
+    # - rustfmt
+    # - clippy
+    - rustup
+    # Rust dev deps
+    - clang # mold dep
+    - mold # Soft
+    # Smithay
+    - libxkbcommon-devel
+    - libseat-devel
+    - libgbm-devel
+    - libinput-devel
+    - systemd-devel
+    - wayland-devel
+
+    # Bevy
+    - gcc-c++
+    - libX11-devel
+    - alsa-lib-devel
+    - systemd-devel
+    - wayland-devel
+    - libxkbcommon-devel
+
+    - vulkan-validation-layers
+    # Dev
+    # - devpod # From ublue/staging
+    - lazygit # From atim/lazygit
+
+    - npm

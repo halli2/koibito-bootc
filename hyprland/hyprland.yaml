@@ -1,0 +1,22 @@
+---
+packages:
+  copr:
+    - solopasha/hyprland
+  install:
+    # - hyprland-git
+    - hyprland
+    - hyprpaper
+    - grimblast
+    - xdg-desktop-portal-hyprland
+
+    - waybar
+    - dunst
+    - rofi-wayland
+
+    - thunar
+    - thunar-archive-plugin
+    - thunar-volman
+    - xarchiver
+
+    - lxpolkit
+    - polkit

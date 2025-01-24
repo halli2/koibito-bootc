@@ -1,0 +1,19 @@
+[Unit]
+Description=EasyEffects Pipewire Equalizer
+Requires=pipewire-pulse.socket
+ConditionUser=!root
+Wants=pipewire.service pipewire-session-manager.service
+After=pipewire.service pipewire-session-manager.service
+BindsTo=pipewire.service
+StartLimitIntervalSec=30
+StartLimitBurst=5
+
+[Service]
+Environment="G_MESSAGES_DEBUG=easyeffects"
+Environment="DISPLAY=:0"
+ExecStart=easyeffects --gapplication-service
+Restart=on-failure
+RestartSec=15s
+
+[Install]
+WantedBy=pipewire.service

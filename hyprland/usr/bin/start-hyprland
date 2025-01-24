@@ -1,0 +1,55 @@
+#!/usr/bin/sh
+
+set -oue pipefail
+# Ported from start-sway
+
+## Internal variables
+readonly _HYPRLAND_COMMAND="/usr/bin/Hyprland"
+HYPRLAND_EXTRA_ARGS=""
+
+# Session
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=hyprland
+# export XDG_CURRENT_DESKTOP=hyprland
+# Wayland stuff
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+## Apply `environment.d(5)` customizations
+# This can be used to share the custom environment configs with systemd --user.
+# Importing `systemd --user show-environment` here may have unexpected
+# consequences, such as getting a leftover `WAYLAND_DISPLAY` or `DISPLAY`
+# and breaking Sway startup. Thus, the direct call to a systemd generator.
+set -o allexport
+eval "$(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)"
+set +o allexport
+
+## Load hypr-specific user environment customizations
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/hyprland/environment" ]; then
+    set -o allexport
+    # shellcheck source=/dev/null
+    . "${XDG_CONFIG_HOME:-$HOME/.config}/hyprland/environment"
+    set +o allexport
+fi
+
+## Unexport internal variables
+# export -n is not POSIX :(
+_HYPRLAND_EXTRA_ARGS="$HYPRLAND_EXTRA_ARGS"
+unset HYPRLAND_EXTRA_ARGS
+
+## Log all exported WLR_ variables
+if _WLR_VARS=$(env | grep '^WLR_'); then
+    printf 'environment variables for wlroots: %s' "$_WLR_VARS" |
+        tr '\n' ' ' |
+        systemd-cat -p notice -t "${_HYPRLAND_COMMAND##*/}"
+fi
+
+# Start hyprland with extra arguments and send output to the journal
+# shellcheck disable=SC2086 # quoted expansion of EXTRA_ARGS can produce empty field
+exec systemd-cat --identifier=hyprland -- $_HYPRLAND_COMMAND $_HYPRLAND_EXTRA_ARGS "$@"
+
+# Target to start user services after startup
+# "systemctl --user start hyprland.target" in hyprland config
+exec systemctl --user stop hyprland-session.target

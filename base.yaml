@@ -1,0 +1,53 @@
+---
+packages:
+  # copr:
+  #   - user/repo
+  install:
+    - audit
+    - alsa-utils
+    - default-fonts
+    - distrobox
+    - ffmpeg
+    - ffmpeg-libs
+    - firewalld
+    - flatpak
+    - flatpak-spawn
+    - fzf
+    - google-noto-sans-balinese-fonts
+    - google-noto-sans-cjk-fonts
+    - google-noto-sans-javanese-fonts
+    - google-noto-sans-sundanese-fonts
+    - google-noto-emoji-fonts
+    - google-noto-color-emoji-fonts
+    - helix
+    - htop
+    - just
+    - nvtop
+    - openrgb-udev-rules
+    # - oversteer-udev
+    - pipewire-codec-aptx
+    - procs
+    - rsync
+    - tcpdump
+    - tmux
+    - traceroute
+    - tree
+    - wireguard-tools
+    - zip
+    - zstd
+    - firefox
+
+    # Network
+    - systemd-networkd
+    - systemd-networkd-defaults
+
+  uninstall:
+    - ffmpeg-free
+systemd:
+  enable:
+    - firewalld.service
+  #   - podman.socket
+  #   - systemd-networkd
+  disable:
+    - bootc-fetch-apply-updates.timer
+  #   - NetworkManager
