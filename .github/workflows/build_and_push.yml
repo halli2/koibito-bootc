@@ -1,0 +1,51 @@
+name: Build bootc image
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - "README.md"
+      - "justfile"
+      - "brew.yml"
+      - ".github/**"
+    branches:
+      - main
+  schedule:
+    - cron: "5 4 * * *" # Should be after official fedora pushes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+    steps:
+      # Based on https://github.com/orgs/community/discussions/25678
+      # Uncomment if builder runs out of space
+      # - name: Delete huge unnecessary tools folder
+      #   run: rm -rf /opt/hostedtoolcache
+
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Use buildah to create the image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: koibito
+          tags: latest ${{ github.sha }}
+          containerfiles: ./Containerfile
+
+      - name: Log in to Github Container registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to GHCR
+        id: push-to-ghcr
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ env.REGISTRY }}
