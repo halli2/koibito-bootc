@@ -37,7 +37,8 @@ RUN /tmp/build_yml.sh /tmp/dev-packages.yaml
 RUN dnf -y install sway-config-fedora sway
 COPY hyprland /tmp/hyprland
 RUN /tmp/build_yml.sh /tmp/hyprland/hyprland.yaml && \
-    cp -r /tmp/hyprland/usr /
+    cp -r /tmp/hyprland/usr / && \
+    cp -r /tmp/hyprland/etc /
 
 # Scheduler
 RUN dnf -y copr enable kylegospo/system76-scheduler && \

@@ -20,6 +20,6 @@ for FILE in $KOI_DIR/just/*; do
 done
 
 # Services
-mkdir -p /usr/etc/systemd/user
-cp $SCRIPT_DIR/fcitx5.service /usr/etc/systemd/user/
-cp $SCRIPT_DIR/easyeffects.service /usr/etc/systemd/user/
+mkdir -p /etc/systemd/user
+cp $SCRIPT_DIR/fcitx5.service /etc/systemd/user/
+cp $SCRIPT_DIR/easyeffects.service /etc/systemd/user/
