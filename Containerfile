@@ -33,6 +33,7 @@ RUN /tmp/build_yml.sh /tmp/koibito.yaml
 COPY dev-packages.yaml /tmp/dev-packages.yaml
 RUN /tmp/build_yml.sh /tmp/dev-packages.yaml
 
+# Sway as backup
 RUN dnf -y install sway-config-fedora sway
 COPY hyprland /tmp/hyprland
 RUN /tmp/build_yml.sh /tmp/hyprland/hyprland.yaml && \
@@ -55,3 +56,5 @@ RUN dnf clean all
 # RUN useradd -G wheel -p sa97a3iPo6ucE core && \
 #     mkdir -m 0700 -p /home/core/.ssh && \
 #     chown -R core: /home/core
+
+RUN bootc container lint
