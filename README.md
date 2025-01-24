@@ -17,5 +17,7 @@ Personal bootc fedora setup.
 
 ### Set up devpods with podman (cli)
 
+```sh
 curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && install -c -m 0755 devpod .local/bin/ && rm -f devpod
 devpod provider add docker --name podman -o DOCKER_PATH=podman
+```
