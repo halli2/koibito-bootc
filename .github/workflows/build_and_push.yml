@@ -14,8 +14,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
+      IMAGE_TAG: latest
+      IMAGE_NAME: ${{ github.event.repository.name }}
       REGISTRY: ghcr.io/${{ github.repository_owner }}
 
     steps:
@@ -27,13 +29,73 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v4
 
-      - name: Use buildah to create the image
-        id: build-image
-        uses: redhat-actions/buildah-build@v2
+      - name: Get current date
+        id: date
+        run: |
+          # This generates a timestamp like what is defined on the ArtifactHub documentation
+          # E.G: 2022-02-08T15:38:15Z'
+          # https://artifacthub.io/docs/topics/repositories/container-images/
+          # https://linux.die.net/man/1/date
+          echo "date=$(date -u +%Y\-%m\-%d\T%H\:%M\:%S\Z)" >> $GITHUB_OUTPUT
+
+      # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
+      # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
+      - name: Image Metadata
+        uses: docker/metadata-action@369eb591f429131d6889c46b94e711f089e6ca96 # v5
+        id: metadata
         with:
-          image: koibito-bootc
-          tags: latest ${{ github.sha }}
-          containerfiles: ./Containerfile
+          # This generates all the tags for your image, you can add custom tags here too!
+          # By default, it should generate "latest" and "latest.(date here)".
+          tags: |
+            type=raw,value=latest
+            type=raw,value=latest.{{date 'YYYYMMDD'}}
+            type=raw,value={{date 'YYYYMMDD'}}
+            type=sha,enable=${{ github.event_name == 'pull_request' }}
+            type=ref,event=pr
+          labels: |
+            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/refs/heads/main/README.md
+            org.opencontainers.image.created=${{ steps.date.outputs.date }}
+            org.opencontainers.image.description=${{ env.IMAGE_DESC }}
+            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/refs/heads/main/README.md
+            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/blob/main/Containerfile
+            org.opencontainers.image.title=${{ env.IMAGE_NAME }}
+            org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.vendor=${{ github.repository_owner }}
+            org.opencontainers.image.version=latest
+            io.artifacthub.package.deprecated=false
+            io.artifacthub.package.keywords=bootc,ublue,universal-blue
+            io.artifacthub.package.license=Apache-2.0
+            io.artifacthub.package.logo-url=${{ env.ARTIFACTHUB_LOGO_URL }}
+            io.artifacthub.package.prerelease=false
+            containers.bootc=1
+          sep-tags: " "
+          sep-annotations: " "
+
+      # Since redhat-actions/buildah-build@v2 doesnt use sudo, run it manually
+      # or else rechunker won't work.
+      - name: Build the image
+        id: build-image
+        shell: bash
+        run: |
+          sudo buildah build --pull=newer --tag raw_img
+
+      - name: Rechunk
+        id: rechunk
+        uses: hhd-dev/rechunk@v1.1.2
+        with:
+          rechunk: ghcr.io/hhd-dev/rechunk:v1.1.2
+          ref: raw_img
+          prev-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}
+          skip_compression: true
+          labels: ${{ steps.metadata.outputs.labels }}
+
+      - name: Load in podman and tag
+        run: |
+          IMAGE=$(podman pull ${{ steps.rechunk.outputs.ref }})
+          sudo rm -rf ${{ steps.rechunk.outputs.output }}
+          for tag in ${{ steps.metadata.outputs.tags }}; do
+            podman tag $IMAGE ${{ env.IMAGE_NAME }}:$tag
+          done
 
       - name: Log in to Github Container registry
         uses: redhat-actions/podman-login@v1
@@ -45,12 +107,7 @@ jobs:
       - name: Push to GHCR
         id: push-to-ghcr
         uses: redhat-actions/push-to-registry@v2
-        env:
-          REGISTRY_USER: ${{ github.actor }}
-          REGISTRY_PASSWORD: ${{ github.token }}
         with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: ${{ steps.build-image.outputs.tags }}
+          image: ${{ steps.IMAGE_NAME }}
+          tags: ${{ steps.metadata.outputs.tags }}
           registry: ${{ env.REGISTRY }}
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
