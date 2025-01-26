@@ -2,7 +2,7 @@
 packages:
   copr:
     - che/nerd-fonts
-    - vulongm/gamescope-git
+    # - vulongm/gamescope-git
     - varlad/zellij
   install:
     # Common
