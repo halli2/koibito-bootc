@@ -49,5 +49,4 @@ systemd:
   #   - podman.socket
   #   - systemd-networkd
   disable:
-    - bootc-fetch-apply-updates.timer
   #   - NetworkManager

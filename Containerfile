@@ -11,10 +11,9 @@ COPY config /tmp/config
 RUN /tmp/config/build.sh
 # Add bootc installation config (btrfs)
 COPY /bootc/rootfs/usr /usr
-RUN systemctl disable bootc-fetch-apply-updates.timer && \
-    systemctl disable bootc-fetch-apply-updates.service
-# It is disabled but it still starts??
-RUN rm /usr/lib/systemd/system/bootc-fetch-apply-updates.timer
+
+# Stop bootc from auto-rebooting on update
+RUN sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-updates.service
 
 # Install fsync kernel && mesa-git
 # RUN dnf -y copr enable sentry/kernel-fsync && \
