@@ -1,17 +1,10 @@
 ---
 # Packages to install
 packages:
-  copr:
-    # - ublue-os/staging
-    - atim/lazygit
+  # copr:
+  #   - user/repo
 
   install:
-    # Rust
-    # - rust
-    # - cargo
-    # - rust-analyzer
-    # - rustfmt
-    # - clippy
     - rustup
     # Rust dev deps
     - clang # mold dep
@@ -33,8 +26,4 @@ packages:
     - libxkbcommon-devel
 
     - vulkan-validation-layers
-    # Dev
-    # - devpod # From ublue/staging
-    - lazygit # From atim/lazygit
-
     - npm

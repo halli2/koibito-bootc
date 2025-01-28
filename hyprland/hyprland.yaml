@@ -3,7 +3,6 @@ packages:
   copr:
     - solopasha/hyprland
   install:
-    # - hyprland-git
     - hyprland
     - hyprpaper
     - grimblast
