@@ -4,20 +4,12 @@
 _default:
     @just --list
 
-
 build:
     podman build -t koibito-bootc:41 .
 
 build-from-scratch:
     podman build --pull=always --no-cache -t koibito-bootc:41 .
 
-push_to_registry:
-    podman push koibito-bootc:41 registry.666777555.xyz/koibito-bootc:41
-
-build_to_registry:
-    @just build-from-scratch
-    @just push_to_registry
-        
 
 # VM Test
 build-qcow2:
