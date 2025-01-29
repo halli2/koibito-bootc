@@ -28,10 +28,11 @@ packages:
     - fd-find
     - fish
     - git-delta
+    - helix
     - ripgrep
+    - zellij
     - zoxide
     - zsh
-    - zellij
 
     # Media
     - easyeffects

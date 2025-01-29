@@ -3,28 +3,28 @@ packages:
   copr:
     - taywee/helix # TODO: Temporary, until official repos are updated
   install:
-    - audit
     - alsa-utils
+    - audit
     - default-fonts
     - distrobox
     - ffmpeg
     - ffmpeg-libs
+    - firefox
     - firewalld
     - flatpak
     - flatpak-spawn
     - fzf
+    - git
+    - google-noto-color-emoji-fonts
+    - google-noto-emoji-fonts
     - google-noto-sans-balinese-fonts
     - google-noto-sans-cjk-fonts
     - google-noto-sans-javanese-fonts
     - google-noto-sans-sundanese-fonts
-    - google-noto-emoji-fonts
-    - google-noto-color-emoji-fonts
-    - helix
     - htop
     - just
     - nvtop
     - openrgb-udev-rules
-    # - oversteer-udev
     - pipewire-codec-aptx
     - procs
     - rsync
@@ -35,7 +35,6 @@ packages:
     - wireguard-tools
     - zip
     - zstd
-    - firefox
 
     # Network
     - systemd-networkd
