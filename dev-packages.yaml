@@ -17,6 +17,8 @@ packages:
     - systemd-devel
     - wayland-devel
 
+    - pipewire-devel
+
     # Bevy
     - gcc-c++
     - libX11-devel
@@ -25,5 +27,7 @@ packages:
     - wayland-devel
     - libxkbcommon-devel
 
+    # Vulkan
+    - libshaderc-static
     - vulkan-validation-layers
     - npm
