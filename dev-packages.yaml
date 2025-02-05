@@ -28,6 +28,5 @@ packages:
     - libxkbcommon-devel
 
     # Vulkan
-    - libshaderc-static
     - vulkan-validation-layers
     - npm
