@@ -1,7 +1,6 @@
 ---
 packages:
   copr:
-    - taywee/helix # TODO: Temporary, until official repos are updated
   install:
     - alsa-utils
     - audit

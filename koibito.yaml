@@ -28,7 +28,7 @@ packages:
     - fd-find
     - fish
     - git-delta
-    - helix
+    # - helix
     - ripgrep
     - zellij
     - zoxide
