@@ -17,8 +17,8 @@ RUN sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin
 
 # Install fsync kernel && mesa-git
 # RUN dnf -y copr enable sentry/kernel-fsync && \
-RUN dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
-# RUN dnf -y copr enable xxmitsu/mesa-git
+# RUN dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
+RUN dnf -y copr enable xxmitsu/mesa-git
 # DONT update (if it updates kernel it messes up)
 # && \
     # dnf -y update --refresh
