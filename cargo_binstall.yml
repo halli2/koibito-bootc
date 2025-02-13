@@ -5,6 +5,5 @@ install:
   - tealdeer
   - uv
   - yazi
-
 uv-tool:
   - jellyfin-mpv-shim 
