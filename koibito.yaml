@@ -4,7 +4,13 @@ packages:
     - che/nerd-fonts
     # - vulongm/gamescope-git
     - varlad/zellij
+    - yalter/niri
+    - ulysg/xwayland-satellite
   install:
+    # Test
+    - niri
+    - xwayland-satellite
+    
     # Common
     - fastfetch
     - lzip
