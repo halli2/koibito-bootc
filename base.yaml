@@ -5,6 +5,8 @@ packages:
     - alsa-utils
     - audit
     - default-fonts
+    # Wider coverage (Braille + more)
+    - dejavu-fonts-all
     - distrobox
     - ffmpeg
     - ffmpeg-libs
