@@ -2,8 +2,11 @@ install:
   - atuin
   - dust
   - podlet
+  - rioterm
   - tealdeer
   - uv
   - yazi
+non_binstall:
+  - taplo-cli --features cli
 uv-tool:
   - jellyfin-mpv-shim 
