@@ -2,6 +2,7 @@
 packages:
   copr:
     - solopasha/hyprland
+    - ryanabx/cosmic-epoch
   install:
     - hyprland
     - hyprpaper
@@ -11,6 +12,9 @@ packages:
     - waybar
     - dunst
     - rofi-wayland
+
+
+    - cosmic-files
 
     - thunar
     - thunar-archive-plugin
