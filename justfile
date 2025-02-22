@@ -1,14 +1,14 @@
-# Installation: sudo podman push koibito-bootc:41 registry.666777555.xyz/koibito-bootc:41
-# sudo podman run --rm --privileged --pid=host -v /var/lib/containers:/var/lib/containers --security-opt label=type:unconfined_t -v /dev:/dev registry.666777555.xyz/koibito-bootc:41 bootc install to-disk /dev/nvme0n1
+# Installation: sudo podman push koibito-bootc:latest registry.666777555.xyz/koibito-bootc:latest
+# sudo podman run --rm --privileged --pid=host -v /var/lib/containers:/var/lib/containers --security-opt label=type:unconfined_t -v /dev:/dev registry.666777555.xyz/koibito-bootc:latest bootc install to-disk /dev/nvme0n1
 
 _default:
     @just --list
 
 build:
-    podman build -t koibito-bootc:41 .
+    podman build -t koibito-bootc:latest .
 
 build-from-scratch:
-    podman build --pull=always --no-cache -t koibito-bootc:41 .
+    podman build --pull=always --no-cache -t koibito-bootc:latest .
 
 
 # VM Test
@@ -26,7 +26,7 @@ build-qcow2:
         quay.io/centos-bootc/bootc-image-builder:latest \
         --type qcow2 \
         --rootfs ext4 \
-        --local localhost/koibito-bootc:41
+        --local localhost/koibito-bootc:latest
 
 # build-iso:
 #     mkdir -p output
@@ -41,7 +41,7 @@ build-qcow2:
 #         quay.io/centos-bootc/bootc-image-builder:latest \
 #         --type anaconda-iso \
 #         --rootfs ext4 \
-#         --local localhost/koibito-bootc:41
+#         --local localhost/koibito-bootc:latest
 
         
 # Start VM

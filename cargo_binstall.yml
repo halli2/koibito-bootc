@@ -1,5 +1,6 @@
 install:
   - atuin
+  - eza
   - dust
   - podlet
   - rioterm

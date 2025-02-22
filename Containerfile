@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-bootc:41
+FROM quay.io/fedora/fedora-bootc:42
 
 # Build dependencies
 RUN dnf -y install yq 'dnf5-command(copr)'

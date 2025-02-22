@@ -5,11 +5,11 @@ packages:
     # - vulongm/gamescope-git
     - varlad/zellij
     - yalter/niri
-    - ulysg/xwayland-satellite
+    # - ulysg/xwayland-satellite
   install:
     # Test
     - niri
-    - xwayland-satellite
+    # - xwayland-satellite
     
     # Common
     - fastfetch
@@ -30,7 +30,7 @@ packages:
 
     # Cli
     - alacritty
-    - eza
+    # - eza
     - fd-find
     - fish
     - git-delta
@@ -45,10 +45,10 @@ packages:
     - imv
     - mpv
     - pamixer
-    - pipewire
-    - pulseaudio-utils # Until wpctl is better for routes(ports)
-    - python3-ffmpeg-python # Manga check color
-    - wireplumber
+    # - pipewire
+    # - pulseaudio-utils # Until wpctl is better for routes(ports)
+    # - wireplumber
+    # - python3-ffmpeg-python # Manga check color
     - zathura
     - zathura-pdf-mupdf
 
