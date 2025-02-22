@@ -71,14 +71,20 @@ jobs:
           sep-tags: " "
           sep-annotations: " "
 
+      - name: Use buildah to create the image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          tags: latest ${{ github.sha }}.{{date 'YYYYMMDD'}}
+          containerfiles: ./Containerfile
       # Since redhat-actions/buildah-build@v2 doesnt use sudo, run it manually
       # or else rechunker won't work.
-      - name: Build the image
-        id: build-image
-        shell: bash
-        run: |
-          sudo buildah build --pull=newer --tag ${{ env.IMAGE_NAME}}:${{ env.IMAGE_TAG }}
-          #sudo buildah build --pull=newer --tag raw_img
+      # - name: Build the image
+      #   id: build-image
+      #   shell: bash
+      #   run: |
+      #     sudo buildah build --pull=newer --tag raw_img
 
       #- name: Rechunk
       #  id: rechunk
@@ -109,7 +115,8 @@ jobs:
         id: push-to-ghcr
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ env.IMAGE_NAME }}
-          tags: ${{ env.IMAGE_TAG }}
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          #image: ${{ env.IMAGE_NAME }}
           #tags: ${{ steps.metadata.outputs.tags }}
           registry: ${{ env.REGISTRY }}
