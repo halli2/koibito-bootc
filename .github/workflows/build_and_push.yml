@@ -76,7 +76,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: latest ${{ github.sha }}.{{date 'YYYYMMDD'}}
+          tags: latest ${{ github.sha }}
           containerfiles: ./Containerfile
       # Since redhat-actions/buildah-build@v2 doesnt use sudo, run it manually
       # or else rechunker won't work.
