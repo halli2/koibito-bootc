@@ -77,7 +77,8 @@ jobs:
         id: build-image
         shell: bash
         run: |
-          sudo buildah build --pull=newer --tag raw_img
+          sudo buildah build --pull=newer --tag ${{ env.IMAGE_NAME}}:${{ env.IMAGE_TAG }}
+          #sudo buildah build --pull=newer --tag raw_img
 
       #- name: Rechunk
       #  id: rechunk
@@ -109,5 +110,6 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ steps.metadata.outputs.tags }}
+          tags: ${{ env.IMAGE_TAG }}
+          #tags: ${{ steps.metadata.outputs.tags }}
           registry: ${{ env.REGISTRY }}
