@@ -23,8 +23,8 @@ jobs:
     steps:
       # Based on https://github.com/orgs/community/discussions/25678
       # Uncomment if builder runs out of space
-      # - name: Delete huge unnecessary tools folder
-      #   run: rm -rf /opt/hostedtoolcache
+      - name: Delete huge unnecessary tools folder
+        run: rm -rf /opt/hostedtoolcache
 
       - name: Clone repo
         uses: actions/checkout@v4
