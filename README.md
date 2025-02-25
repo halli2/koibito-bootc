@@ -10,6 +10,18 @@ Personal bootc fedora setup.
 - hyprland/hyprland.yaml
 - cosmic/cosmic.yaml (not in use)
 
+## To run as a VM
+
+The justfile contains commands for building/starting a VM, it needs a configuration file.
+Create a `config.toml` in the main directory like this, replace name and password as wanted and change the key to your public ssh key:
+
+```toml
+[[customizations.user]]
+name = "core"
+password = "core"
+key = "ssh-ed25519 AAA...core@fedora"
+groups = ["wheel"]
+```
 
 ## Manual setup
 

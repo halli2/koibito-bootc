@@ -23,6 +23,8 @@ packages:
     - xdotool
     - ydotool
 
+    - qemu
+    
     - fuse
     - fuse-devel
     # Shadps4

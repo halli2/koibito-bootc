@@ -14,6 +14,7 @@ build-from-scratch:
 # VM Test
 build-qcow2:
     mkdir -p output
+    sudo podman build -t koibito-bootc:latest .
     sudo podman run \
         --rm \
         -it \
