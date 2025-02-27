@@ -24,6 +24,7 @@ packages:
     - ydotool
 
     - qemu
+    - virt-viewer
     
     - fuse
     - fuse-devel
