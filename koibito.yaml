@@ -76,6 +76,7 @@ packages:
     - mecab-ipadic
     # Owocr
     - python3-devel
+    - xrandr
 
     # Other
     - android-tools
