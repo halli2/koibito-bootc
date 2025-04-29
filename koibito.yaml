@@ -7,10 +7,6 @@ packages:
     - yalter/niri
     # - ulysg/xwayland-satellite
   install:
-    # Test
-    - niri
-    # - xwayland-satellite
-    
     # Common
     - fastfetch
     - lzip
@@ -64,8 +60,6 @@ packages:
 
     # Hardware Accel
     - rocm-hip
-    # Broken because of fake dependency atm (16.12.24)
-    # - rocm-opencl
     - rocm-clinfo
 
     # JP
