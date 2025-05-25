@@ -1,8 +1,9 @@
 # Update flatpak, cargo, and python tools
 update:
-	flatpak update -y
-	cargo install-update -a -- y
-	uv tool upgrade --all
+	-flatpak update -y
+	-cargo install-update -a -- y
+	-uv tool upgrade --all
+	-tldr --update
 
 # Clean cached python packages (uv) and container images (podman)
 clean:
