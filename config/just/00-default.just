@@ -4,6 +4,7 @@ update:
 	-cargo install-update -a -- y
 	-uv tool upgrade --all
 	-tldr --update
+	-rustup update
 
 # Clean cached python packages (uv) and container images (podman)
 clean:
