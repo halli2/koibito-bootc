@@ -10,3 +10,4 @@ packages:
     - clang # mold dep
     - mold # Soft
     - npm
+    - go
