@@ -34,7 +34,8 @@ COPY dev-packages.yaml /tmp/dev-packages.yaml
 RUN /tmp/build_yml.sh /tmp/dev-packages.yaml
 
 # Sway as backup
-RUN dnf -y install sway-config-fedora sway
+# Remove as CI is complaining about space.
+# RUN dnf -y install sway-config-fedora sway
 COPY hyprland /tmp/hyprland
 RUN /tmp/build_yml.sh /tmp/hyprland/hyprland.yaml && \
     cp -r /tmp/hyprland/usr / && \
