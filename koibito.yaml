@@ -2,10 +2,7 @@
 packages:
   copr:
     - che/nerd-fonts
-    # - vulongm/gamescope-git
     - varlad/zellij
-    - yalter/niri
-    # - ulysg/xwayland-satellite
   install:
     # Common
     - fastfetch
