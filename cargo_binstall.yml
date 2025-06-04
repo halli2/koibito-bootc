@@ -12,3 +12,5 @@ non_binstall:
   - taplo-cli --features cli
 uv-tool:
   - jellyfin-mpv-shim 
+  # Needs winetricks installed
+  - protontricks

@@ -2,7 +2,6 @@
 packages:
   copr:
     - che/nerd-fonts
-    - varlad/zellij
   install:
     # Common
     - fastfetch
@@ -27,7 +26,6 @@ packages:
     # Cli
     - alacritty
     - rioterm
-    # - eza
     - fd-find
     - fish
     - git-delta
@@ -53,7 +51,7 @@ packages:
     # Gaming
     - gamescope
     - mangohud
-    - protontricks
+    - terra-winetricks
     - steam
     - steam-devices
 
