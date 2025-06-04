@@ -64,8 +64,8 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build_yml.sh /ctx/hyprland/hyprland.yaml && \
-    cp -r /tmp/hyprland/usr / && \
-    cp -r /tmp/hyprland/etc / && \
+    cp -r /ctx/hyprland/usr / && \
+    cp -r /ctx/hyprland/etc / && \
     /ctx/cleanup.sh
 
 # Scheduler
