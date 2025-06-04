@@ -49,8 +49,5 @@ dnf -y install \
   ${GEN_PKGS[@]} \
   ${DEV_PKGS[@]} \
   ${DEV_DEPS[@]}
-
-
-
 EOF
 

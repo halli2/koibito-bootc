@@ -12,8 +12,6 @@ packages:
     - dunst
     - rofi-wayland
 
-    - cosmic-files
-
     - thunar
     - thunar-archive-plugin
     - thunar-volman

@@ -27,8 +27,6 @@ packages:
     - alacritty
     - rioterm
     - fd-find
-    - fish
-    - git-delta
     # - helix
     - ripgrep
     - zellij
@@ -44,14 +42,12 @@ packages:
     # - pipewire
     # - pulseaudio-utils # Until wpctl is better for routes(ports)
     # - wireplumber
-    # - python3-ffmpeg-python # Manga check color
     - zathura
     - zathura-pdf-mupdf
 
     # Gaming
     - gamescope
     - mangohud
-    - terra-winetricks
     - steam
     - steam-devices
 
@@ -63,11 +59,6 @@ packages:
     - langpacks-ja
     - fcitx5
     - fcitx5-mozc
-    - mecab
-    - mecab-ipadic
-    # Owocr
-    - python3-devel
-    - xrandr
 
     # Other
     - android-tools
