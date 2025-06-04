@@ -1,17 +1,25 @@
-FROM quay.io/fedora/fedora-bootc:42
+FROM scratch AS ctx
+COPY build_scripts /
 
+FROM quay.io/fedora/fedora-bootc:42
 # Build dependencies
-RUN dnf -y install yq 'dnf5-command(copr)'
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    dnf -y install yq 'dnf5-command(copr)'
 # Enable rpmfusion
 # RUN dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-RUN dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release && \
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release && \
     dnf -y install terra-release-extras && \
-    dnf -y config-manager setopt terra-mesa.enabled=1
+    dnf -y config-manager setopt terra-mesa.enabled=1 && \
+    /ctx/cleanup.sh
 
 # Configure the image
-COPY build_yml.sh /tmp/build_yml.sh
+# COPY build_yml.sh /tmp/build_yml.sh
 COPY config /tmp/config
-RUN /tmp/config/build.sh
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    /tmp/config/build.sh && \
+    /ctx/cleanup.sh
+
 # Add bootc installation config (btrfs)
 COPY /bootc/rootfs/usr /usr
 
@@ -28,33 +36,43 @@ RUN sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin
     # dnf -y update --refresh
 
 COPY base.yaml /tmp/base.yaml
-RUN /tmp/build_yml.sh /tmp/base.yaml
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    /ctx/build_yml.sh /tmp/base.yaml && \
+    /ctx/cleanup.sh
 
 COPY koibito.yaml /tmp/koibito.yaml
-RUN /tmp/build_yml.sh /tmp/koibito.yaml
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    /ctx/build_yml.sh /tmp/koibito.yaml
 
 COPY dev-packages.yaml /tmp/dev-packages.yaml
-RUN /tmp/build_yml.sh /tmp/dev-packages.yaml
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    /ctx/build_yml.sh /tmp/dev-packages.yaml && \
+    /ctx/cleanup.sh
 
 # Sway as backup
 # Remove as CI is complaining about space.
 # RUN dnf -y install sway-config-fedora sway
 COPY hyprland /tmp/hyprland
-RUN /tmp/build_yml.sh /tmp/hyprland/hyprland.yaml && \
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    /ctx/build_yml.sh /tmp/hyprland/hyprland.yaml && \
     cp -r /tmp/hyprland/usr / && \
-    cp -r /tmp/hyprland/etc /
+    cp -r /tmp/hyprland/etc / && \
+    /ctx/cleanup.sh
 
 # Scheduler
-RUN dnf -y copr enable kylegospo/system76-scheduler && \
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    dnf -y copr enable kylegospo/system76-scheduler && \
     dnf -y install system76-scheduler && \
-    systemctl enable com.system76.Scheduler.service
+    systemctl enable com.system76.Scheduler.service && \
+    /ctx/cleanup.sh
 
 # COPY cosmic /tmp/cosmic
-# RUN /tmp/build_yml.sh /tmp/cosmic/cosmic.yaml && \
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#    /ctx/build_yml.sh /tmp/cosmic/cosmic.yaml && \
 #     cp /tmp/cosmic/greetd-workaround.service /usr/lib/systemd/system/
-#     # systemctl enable greetd-workaround.service
+#     # systemctl enable greetd-workaround.service && \
+# /ctx/cleanup.sh
 
-RUN dnf clean all
 
 # Adds core user with password "core"
 # For local running in a container..
