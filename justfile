@@ -5,14 +5,14 @@ _default:
     @just --list
 
 build_chunked:
-    podman build -t koibito:latest .
+    sudo podman build -t koibito:latest .
     sudo podman run --rm \
         --privileged \
         -v /var/lib/containers:/var/lib/containers \
         "quay.io/centos-bootc/centos-bootc:stream10" \
         /usr/libexec/bootc-base-imagectl rechunk \
             localhost/koibito:latest \
-            localhost/koibito:latest    
+            localhost/koibito:latest
 
 build:
     podman build -t koibito-bootc:latest .

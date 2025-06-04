@@ -21,18 +21,18 @@ jobs:
       REGISTRY: ghcr.io/${{ github.repository_owner }}
 
     steps:
-      - name: Maximize build space
-        uses: AdityaGarg8/remove-unwanted-software@v5
-        with:
-          remove-dotnet: "true"
-          remove-android: "true"
-          remove-haskell: "true"
-          remove-codeql: "true"
-          remove-docker-images: "true"
-          remove-large-packages: "true"
-          remove-cached-tools: "true"
-          remove-swapfile: "true"
-          verbose: "false"
+      # - name: Maximize build space
+      #   uses: AdityaGarg8/remove-unwanted-software@v5
+      #   with:
+      #     remove-dotnet: "true"
+      #     remove-android: "true"
+      #     remove-haskell: "true"
+      #     remove-codeql: "true"
+      #     remove-docker-images: "true"
+      #     remove-large-packages: "true"
+      #     remove-cached-tools: "true"
+      #     remove-swapfile: "true"
+      #     verbose: "false"
       # Based on https://github.com/orgs/community/discussions/25678
       # Uncomment if builder runs out of space
       # - name: Delete huge unnecessary tools folder
@@ -42,15 +42,6 @@ jobs:
 
       - name: Clone repo
         uses: actions/checkout@v4
-
-      - name: Get current date
-        id: date
-        run: |
-          # This generates a timestamp like what is defined on the ArtifactHub documentation
-          # E.G: 2022-02-08T15:38:15Z'
-          # https://artifacthub.io/docs/topics/repositories/container-images/
-          # https://linux.die.net/man/1/date
-          echo "date=$(date -u +%Y\-%m\-%d\T%H\:%M\:%S\Z)" >> $GITHUB_OUTPUT
 
       - name: Build image
         id: build-image
@@ -93,10 +84,19 @@ jobs:
 
       - name: Push to GHCR
         id: push-to-ghcr
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          # image: ${{ steps.build-image.outputs.image }}
-          # tags: ${{ steps.build-image.outputs.tags }}
-          image: localhost/${{ env.IMAGE_NAME }}
-          tags: ${{ env.IMAGE_TAG }}
-          registry: ${{ env.REGISTRY }}
+        run: |
+          sudo podman tag \
+            localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
+            ${{ env.REGISTRY }}${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+          sudo podman push ${{ env.REGISTRY }}${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+      # - name: Push to GHCR
+      #   id: push-to-ghcr
+      #   uses: redhat-actions/push-to-registry@v2
+      #   with:
+      #     # image: ${{ steps.build-image.outputs.image }}
+      #     # tags: ${{ steps.build-image.outputs.tags }}
+      #     image: ${{ env.IMAGE_NAME }}
+      #     tags: ${{ env.IMAGE_TAG }}
+      #     registry: ${{ env.REGISTRY }}
