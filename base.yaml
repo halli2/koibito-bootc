@@ -26,7 +26,7 @@ packages:
     - just
     - nvtop
     - openrgb-udev-rules
-    - pipewire-codec-aptx
+    # - pipewire-codec-aptx # rpmfusion
     - procs
     - rsync
     - tcpdump

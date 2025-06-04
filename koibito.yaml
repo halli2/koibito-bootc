@@ -26,6 +26,7 @@ packages:
 
     # Cli
     - alacritty
+    - rioterm
     # - eza
     - fd-find
     - fish
@@ -41,6 +42,7 @@ packages:
     - imv
     - mpv
     - pamixer
+    - pavucontrol
     # - pipewire
     # - pulseaudio-utils # Until wpctl is better for routes(ports)
     # - wireplumber

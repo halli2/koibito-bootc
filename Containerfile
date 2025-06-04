@@ -3,7 +3,10 @@ FROM quay.io/fedora/fedora-bootc:42
 # Build dependencies
 RUN dnf -y install yq 'dnf5-command(copr)'
 # Enable rpmfusion
-RUN dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# RUN dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+RUN dnf -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release && \
+    dnf -y install terra-release-extras && \
+    dnf -y config-manager setopt terra-mesa.enabled=1
 
 # Configure the image
 COPY build_yml.sh /tmp/build_yml.sh
@@ -17,7 +20,7 @@ RUN sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin
 
 # Install fsync kernel && mesa-git
 # RUN dnf -y copr enable sentry/kernel-fsync && \
-RUN dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
+# RUN dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
 # RUN dnf -y copr enable xxmitsu/mesa-git \
 #     dnf -y install mesa-va-drivers mesa-vdpau-drivers
 # DONT update (if it updates kernel it messes up)
