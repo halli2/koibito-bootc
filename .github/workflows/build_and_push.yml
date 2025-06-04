@@ -75,16 +75,17 @@ jobs:
       #   run: |
       #     sudo buildah build --pull=newer --tag raw_img
 
-      - name: Log in to Github Container registry
-        uses: redhat-actions/podman-login@v1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Log in to Github Container registry
+      #   uses: redhat-actions/podman-login@v1
+      #   with:
+      #     registry: ${{ env.REGISTRY }}
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push to GHCR
         id: push-to-ghcr
         run: |
+          sudo podman login ${{ env.REGISTRY }} -u ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
           sudo podman tag \
             localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
             ${{ env.REGISTRY }}${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
