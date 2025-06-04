@@ -43,8 +43,7 @@ jobs:
       - name: Build image
         id: build-image
         shell: bash
-        run: |
-          buildah build --pull-newer --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        run: podman build --t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
 
       - name: Rechunk image
         id: rechunk-image
