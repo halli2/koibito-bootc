@@ -88,9 +88,9 @@ jobs:
           sudo podman login ${{ env.REGISTRY }} -u ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
           sudo podman tag \
             localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
-            ${{ env.REGISTRY }}${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-          sudo podman push ${{ env.REGISTRY }}${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          sudo podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
       # - name: Push to GHCR
       #   id: push-to-ghcr
