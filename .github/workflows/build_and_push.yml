@@ -31,7 +31,7 @@ jobs:
           remove-docker-images: "true"
           remove-large-packages: "true"
           remove-cached-tools: "true"
-          remove-swap-file: "true"
+          remove-swapfile: "true"
           verbose: "false"
       # Based on https://github.com/orgs/community/discussions/25678
       # Uncomment if builder runs out of space
