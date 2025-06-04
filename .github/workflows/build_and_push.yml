@@ -55,7 +55,7 @@ jobs:
       - name: Build image
         id: build-image
         shell: bash
-        run: sudo podman build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+        run: podman build -t localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
 
       - name: Rechunk image
         id: rechunk-image
@@ -66,8 +66,8 @@ jobs:
             -v /var/lib/containers:/var/lib/containers \
             "quay.io/centos-bootc/centos-bootc:stream10" \
             /usr/libexec/bootc-base-imagectl rechunk \
-              ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
-              ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+              localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
+              localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
       # - name: Use buildah to create the image
       #   id: build-image
@@ -115,6 +115,6 @@ jobs:
         with:
           # image: ${{ steps.build-image.outputs.image }}
           # tags: ${{ steps.build-image.outputs.tags }}
-          image: ${{ env.IMAGE_NAME }}
+          image: localhost/${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
           registry: ${{ env.REGISTRY }}
