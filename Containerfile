@@ -19,7 +19,6 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/cleanup.sh
 
 # Configure the image
-COPY config /tmp/config
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
