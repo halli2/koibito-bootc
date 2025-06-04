@@ -55,7 +55,7 @@ jobs:
       - name: Build image
         id: build-image
         shell: bash
-        run: podman build -t localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+        run: sudo podman build -t localhost/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
 
       - name: Rechunk image
         id: rechunk-image
