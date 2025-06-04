@@ -32,7 +32,7 @@ jobs:
           remove-large-packages: "true"
           remove-cached-tools: "true"
           remove-swap-file: "true"
-          verbose: "true"
+          verbose: "false"
       # Based on https://github.com/orgs/community/discussions/25678
       # Uncomment if builder runs out of space
       # - name: Delete huge unnecessary tools folder
