@@ -53,7 +53,7 @@ start-vm:
         -snapshot output/qcow2/disk.qcow2
 
 build-start:
-    @just build
+    @just build_chunked
     @just build-qcow2
     @just start-vm
 
