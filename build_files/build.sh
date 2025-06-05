@@ -20,7 +20,7 @@ dnf -y install kernel kernel{,-core,-modules,-modules-core,-modules-extra}
 
 sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-updates.service
 
-dnf -y install scx-scheds
+dnf -y install scx-scheds-git
 /ctx/config/build.sh
 /ctx/build_yml.sh /ctx/base.yaml
 /ctx/build_yml.sh /ctx/koibito.yaml
