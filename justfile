@@ -18,7 +18,7 @@ build_chunked:
             localhost/koibito:latest \
             localhost/koibito:latest
 build-from-scratch:
-    podman build --pull=always --no-cache -t koibito:latest .
+    sudo podman build --pull=always --no-cache -t koibito:latest .
 
 
 # VM Test
