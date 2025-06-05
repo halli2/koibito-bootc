@@ -27,7 +27,7 @@ packages:
     - alacritty
     - rioterm
     - fd-find
-    # - helix
+    - hx
     - ripgrep
     - zellij
     - zoxide

@@ -1,11 +1,15 @@
-# Installation: sudo podman push koibito-bootc:latest registry.666777555.xyz/koibito-bootc:latest
-# sudo podman run --rm --privileged --pid=host -v /var/lib/containers:/var/lib/containers --security-opt label=type:unconfined_t -v /dev:/dev registry.666777555.xyz/koibito-bootc:latest bootc install to-disk /dev/nvme0n1
+# Installation: sudo podman push koibito:latest registry.666777555.xyz/koibito:latest
+# sudo podman run --rm --privileged --pid=host -v /var/lib/containers:/var/lib/containers --security-opt label=type:unconfined_t -v /dev:/dev registry.666777555.xyz/koibito:latest bootc install to-disk /dev/nvme0n1
 
 _default:
     @just --list
 
-build_chunked:
+
+build:
     sudo podman build -t koibito:latest .
+
+build_chunked:
+    @just build
     sudo podman run --rm \
         --privileged \
         -v /var/lib/containers:/var/lib/containers \
@@ -13,18 +17,14 @@ build_chunked:
         /usr/libexec/bootc-base-imagectl rechunk \
             localhost/koibito:latest \
             localhost/koibito:latest
-
-build:
-    podman build -t koibito-bootc:latest .
-
 build-from-scratch:
-    podman build --pull=always --no-cache -t koibito-bootc:latest .
+    podman build --pull=always --no-cache -t koibito:latest .
 
 
 # VM Test
 build-qcow2:
     mkdir -p output
-    sudo podman build -t koibito-bootc:latest .
+    @just build
     sudo podman run \
         --rm \
         -it \
@@ -37,24 +37,9 @@ build-qcow2:
         quay.io/centos-bootc/bootc-image-builder:latest \
         --type qcow2 \
         --rootfs ext4 \
-        --local localhost/koibito-bootc:latest
+        --local localhost/koibito:latest
 
-# build-iso:
-#     mkdir -p output
-#     sudo podman run \
-#         --rm \
-#         -it \
-#         --privileged \
-#         --pull=newer \
-#         --security-opt label=type:unconfined_t \
-#         -v $(pwd)/output:/output \
-#         -v /var/lib/containers/storage:/var/lib/containers/storage \
-#         quay.io/centos-bootc/bootc-image-builder:latest \
-#         --type anaconda-iso \
-#         --rootfs ext4 \
-#         --local localhost/koibito-bootc:latest
 
-        
 # Start VM
 start-vm:
     qemu-system-x86_64 \
