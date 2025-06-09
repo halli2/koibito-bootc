@@ -50,6 +50,7 @@ packages:
     - mangohud
     - steam
     - steam-devices
+    - protontricks
 
     # Hardware Accel
     - rocm-hip
