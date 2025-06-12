@@ -20,6 +20,10 @@ packages:
     
     - fuse
     - fuse-devel
+
+    # Dont use fedoras version
+    - terra-wine-stable
+    
     # Shadps4
     - qt6-qtmultimedia
 
@@ -50,7 +54,7 @@ packages:
     - mangohud
     - steam
     - steam-devices
-    - protontricks
+    # - protontricks # Install manually as we need terra-wine for up to date mesa.
 
     # Hardware Accel
     - rocm-hip
