@@ -25,6 +25,7 @@ packages:
     - htop
     - just
     - nvtop
+    - cpu-x
     - openrgb-udev-rules
     - procs
     - rsync
