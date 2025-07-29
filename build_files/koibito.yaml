@@ -57,8 +57,8 @@ packages:
     # - protontricks # Install manually as we need terra-wine for up to date mesa.
 
     # Hardware Accel
-    - rocm-hip
-    - rocm-clinfo
+    # - rocm-hip
+    # - rocm-clinfo
 
     # JP
     - langpacks-ja
