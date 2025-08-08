@@ -9,7 +9,7 @@ packages:
     - dejavu-fonts-all
     - distrobox
     - ffmpeg
-    # - ffmpeg-libs
+    - ffmpeg-libs
     - firefox
     - firewalld
     - flatpak
