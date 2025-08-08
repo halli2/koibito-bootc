@@ -9,14 +9,20 @@ dnf -y install \
   --repofrompath "terra,https://repos.fyralabs.com/terra$(rpm -E %fedora)" \
   --setopt="terra.gpgkey=https://repos.fyralabs.com/terra$(rpm -E %fedora)/key.asc" \
   terra-release
-dnf -y install terra-release-extras
-dnf -y config-manager setopt terra-mesa.enabled=1
+# dnf -y install terra-release-extras
+# dnf -y config-manager setopt terra-mesa.enabled=1
+
+dnf -y install \
+  https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+  https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
 dnf -y copr enable bieszczaders/kernel-cachyos-addons
 
 # Install kernel
 dnf -y copr enable sentry/kernel-blu
 dnf -y remove kernel kernel{,-core,-modules,-modules-core,-modules-extra}
 dnf -y install kernel kernel{,-core,-modules,-modules-core,-modules-extra}
+dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
 
 sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-updates.service
 
