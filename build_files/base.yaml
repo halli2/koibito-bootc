@@ -8,7 +8,7 @@ packages:
     # Wider coverage (Braille + more)
     - dejavu-fonts-all
     - distrobox
-    # - ffmpeg
+    - ffmpeg
     # - ffmpeg-libs
     - firefox
     - firewalld
