@@ -55,7 +55,6 @@ packages:
     - steam
     - steam-devices
     # - protontricks # Install manually as we need terra-wine for up to date mesa.
-    - python3-tkinter
 
     # Hardware Accel
     # - rocm-hip
