@@ -22,7 +22,7 @@ packages:
     - fuse-devel
 
     # Dont use fedoras version
-    # - terra-wine-stable
+    - terra-wine-stable
     
     # Shadps4
     - qt6-qtmultimedia
