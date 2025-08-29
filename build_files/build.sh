@@ -24,7 +24,7 @@ dnf -y remove kernel kernel{,-core,-modules,-modules-core,-modules-extra}
 dnf -y install kernel kernel{,-core,-modules,-modules-core,-modules-extra}
 dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
 
-sed -i "s,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-updates.service
+sed -i "s,ExecStart=/usr/bin/bootc upgrade --apply --quiet,ExecStart=/usr/bin/bootc upgrade --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-upgrades.service
 
 dnf -y install scx-scheds-git
 /ctx/config/build.sh
