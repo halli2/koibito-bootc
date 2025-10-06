@@ -36,6 +36,8 @@ dnf -y install scx-scheds-git
 cp -r /ctx/hyprland/usr /
 cp -r /ctx/hyprland/etc /
 
+/ctx/build_yml.sh /ctx/niri/niri.yaml
+
 dnf clean all
 rm -rf /tmp/* || true
 rm -rf /var/log/*
