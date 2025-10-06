@@ -54,6 +54,7 @@ packages:
     - mangohud
     - steam
     - steam-devices
+    - winetricks
     # - protontricks # Install manually as we need terra-wine for up to date mesa.
 
     # Hardware Accel
