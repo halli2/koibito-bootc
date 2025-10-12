@@ -32,11 +32,10 @@ dnf -y install scx-scheds-git
 /ctx/build_yml.sh /ctx/koibito.yaml
 /ctx/build_yml.sh /ctx/dev-packages.yaml
 
-/ctx/build_yml.sh /ctx/hyprland/hyprland.yaml
-cp -r /ctx/hyprland/usr /
-cp -r /ctx/hyprland/etc /
-
 /ctx/build_yml.sh /ctx/niri/niri.yaml
+
+# Remove unwanted
+dnf -y remove alacritty swaylock
 
 dnf clean all
 rm -rf /tmp/* || true

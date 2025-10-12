@@ -2,3 +2,10 @@
 packages:
   install:
     - niri
+
+    - dunst
+
+    - thunar
+    - thunar-archive-plugin
+    - thunar-volman
+    - xarchiver
