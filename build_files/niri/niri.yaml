@@ -9,3 +9,6 @@ packages:
     - thunar-archive-plugin
     - thunar-volman
     - xarchiver
+
+    - grim
+    - slurp
