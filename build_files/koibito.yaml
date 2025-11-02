@@ -21,6 +21,8 @@ packages:
     - fuse
     - fuse-devel
 
+    - opentabletdriver
+
     # Dont use fedoras version
     # - terra-wine-stable
     
