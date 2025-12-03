@@ -3,6 +3,7 @@ packages:
   install:
     - niri
 
+    - swaybg
     - dunst
 
     - thunar
