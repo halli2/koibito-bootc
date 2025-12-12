@@ -2,6 +2,7 @@
 packages:
   copr:
     # - che/nerd-fonts
+    - atim/heroic-games-launcher
   install:
     # Common
     - fastfetch
@@ -55,6 +56,7 @@ packages:
     - gamescope
     - mangohud
     - steam
+    - heroic-games-launcher-bin
     - steam-devices
     - winetricks
     # - protontricks # Install manually as we need terra-wine for up to date mesa.
