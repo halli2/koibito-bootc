@@ -26,7 +26,7 @@ dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
 
 sed -i "s,ExecStart=/usr/bin/bootc upgrade --apply --quiet,ExecStart=/usr/bin/bootc upgrade --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-updates.service
 
-dnf -y install scx-scheds-git
+# dnf -y install scx-scheds-git
 /ctx/config/build.sh
 /ctx/build_yml.sh /ctx/base.yaml
 /ctx/build_yml.sh /ctx/koibito.yaml
