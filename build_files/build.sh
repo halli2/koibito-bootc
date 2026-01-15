@@ -34,6 +34,11 @@ sed -i "s,ExecStart=/usr/bin/bootc upgrade --apply --quiet,ExecStart=/usr/bin/bo
 
 /ctx/build_yml.sh /ctx/niri/niri.yaml
 
+# Razor
+dnf config-manager addrepo --from-repofile=https://openrazer.github.io/hardware:razer.repo
+dnf install openrazer-meta
+dnf config-manager addrepo --from-repofile=https://download.opensuse.org/repositories/hardware:razer/Fedora_$(rpm -E %fedora)/hardware:razer.repo
+dnf install razergenie
 # Remove unwanted
 dnf -y remove alacritty swaylock
 
