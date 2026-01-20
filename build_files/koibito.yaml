@@ -24,6 +24,8 @@ packages:
 
     - opentabletdriver
 
+    - podman-compose
+
     # Dont use fedoras version
     # - terra-wine-stable
     
