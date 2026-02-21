@@ -11,3 +11,6 @@ packages:
     - mold # Soft
     - npm
     - openssl-devel
+
+    # Env variable management
+    - direnv
