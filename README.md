@@ -2,12 +2,12 @@
 
 Personal bootc fedora setup.
 
-## Packages are defined in yaml files
+## Packages are defined in yaml files under build_files
 
 - base.yaml
 - koibito.yaml
 - dev-packages.yaml
-- hyprland/hyprland.yaml
+- niri/niri.yaml
 - cosmic/cosmic.yaml (not in use)
 
 ## To run as a VM
