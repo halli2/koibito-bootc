@@ -25,8 +25,6 @@ groups = ["wheel"]
 
 ## Manual setup
 
-### brew.yml
-
 ### Set up devpods with podman (cli)
 
 ```sh
