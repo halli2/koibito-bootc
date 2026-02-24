@@ -41,6 +41,7 @@ packages:
     - zellij
     - zoxide
     - zsh
+    - timg
 
     # Media
     - easyeffects
