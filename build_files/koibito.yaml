@@ -51,6 +51,7 @@ packages:
     - pavucontrol
     # - pipewire
     # - pulseaudio-utils # Until wpctl is better for routes(ports)
+    - pipewire-utils
     # - wireplumber
     - zathura
     - zathura-pdf-mupdf
