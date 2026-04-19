@@ -22,7 +22,8 @@ dnf -y install \
 # dnf -y copr enable sentry/kernel-blu
 # dnf -y remove kernel kernel{,-core,-modules,-modules-core,-modules-extra}
 # dnf -y install kernel kernel{,-core,-modules,-modules-core,-modules-extra}
-dnf -y install mesa-va-drivers-freeworld mesa-vdpau-drivers-freeworld
+dnf -y install mesa-va-drivers-freeworld
+# mesa-vdpau-drivers-freeworld
 
 sed -i "s,ExecStart=/usr/bin/bootc upgrade --apply --quiet,ExecStart=/usr/bin/bootc upgrade --quiet,g" /usr/lib/systemd/system/bootc-fetch-apply-updates.service
 

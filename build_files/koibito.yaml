@@ -38,7 +38,7 @@ packages:
     - fd-find
     - hx
     - ripgrep
-    - zellij
+    # - zellij
     - zoxide
     - zsh
     - timg
